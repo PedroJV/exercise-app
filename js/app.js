@@ -43,6 +43,24 @@ function getRoutine(id) {
   return allRoutines().find((r) => r.id === id);
 }
 
+function renderExerciseDetail(ex) {
+  const imagen = ex.imagen
+    ? `<img src="${ex.imagen}" alt="Demostración de ${ex.nombre}" loading="lazy"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+       <span class="img-fallback">Imagen no disponible por ahora.</span>`
+    : `<span class="img-fallback" style="display:block">Sin imagen de referencia para este ejercicio.</span>`;
+
+  return `
+    <details class="ejercicio-detalle">
+      <summary>Ver músculo trabajado y cómo hacerlo</summary>
+      <div class="detalle-body">
+        <div class="detalle-imagen">${imagen}</div>
+        <p><strong>Músculo trabajado:</strong> ${ex.musculo || "—"}</p>
+        <p><strong>Cómo hacerlo:</strong> ${ex.descripcion || "—"}</p>
+      </div>
+    </details>`;
+}
+
 // ---------- Navegación por pestañas ----------
 
 document.querySelectorAll(".tab-btn").forEach((btn) => {
@@ -78,11 +96,14 @@ function renderHoy() {
     .map(
       (ex, i) => `
       <li class="ejercicio-item">
-        <label class="check-label">
-          <input type="checkbox" class="hoy-check" data-id="${ex.id}">
-          <span><strong>${ex.nombre}</strong> — ${ex.series} series</span>
-        </label>
-        <input type="text" class="hoy-reps" data-id="${ex.id}" value="${ex.reps}" aria-label="Repeticiones realizadas">
+        <div class="ejercicio-item-top">
+          <label class="check-label">
+            <input type="checkbox" class="hoy-check" data-id="${ex.id}">
+            <span><strong>${ex.nombre}</strong> — ${ex.series} series</span>
+          </label>
+          <input type="text" class="hoy-reps" data-id="${ex.id}" value="${ex.reps}" aria-label="Repeticiones realizadas">
+        </div>
+        ${renderExerciseDetail(ex)}
       </li>`
     )
     .join("");
@@ -171,7 +192,7 @@ function renderRutinas() {
       const items = r.ejercicios
         .map((id) => getExercise(id))
         .filter(Boolean)
-        .map((ex) => `<li>${ex.nombre} — ${ex.series}x${ex.reps}</li>`)
+        .map((ex) => `<li>${ex.nombre} — ${ex.series}x${ex.reps}${renderExerciseDetail(ex)}</li>`)
         .join("");
       const esPersonalizada = state.customRoutines.some((cr) => cr.id === r.id);
       return `

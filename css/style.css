@@ -101,12 +101,55 @@ main {
 }
 
 .ejercicio-item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ejercicio-item-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--color-border);
+}
+
+.ejercicio-detalle {
+  margin-top: 8px;
+}
+
+.ejercicio-detalle summary {
+  cursor: pointer;
+  color: var(--color-primary-dark);
+  font-size: 0.85rem;
+}
+
+.detalle-body {
+  margin-top: 8px;
+  padding: 10px;
+  background: #f7faf8;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.detalle-body p {
+  margin: 6px 0;
+}
+
+.detalle-imagen {
+  margin-bottom: 8px;
+}
+
+.detalle-imagen img {
+  max-width: 100%;
+  max-height: 220px;
+  border-radius: 8px;
+  display: block;
+}
+
+.img-fallback {
+  display: none;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  font-style: italic;
 }
 
 .ejercicio-item:last-child {
