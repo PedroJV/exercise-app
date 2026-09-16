@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutinas en Casa</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>🏠 Rutinas en Casa</h1>
+    <p class="subtitle">Ejercicio nivel inicial · repeticiones, horario y registro</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="hoy">Hoy</button>
+    <button class="tab-btn" data-tab="horario">Horario</button>
+    <button class="tab-btn" data-tab="rutinas">Rutinas</button>
+    <button class="tab-btn" data-tab="historial">Historial</button>
+  </nav>
+
+  <main>
+    <section id="tab-hoy" class="tab-panel active">
+      <div id="hoy-content"></div>
+    </section>
+
+    <section id="tab-horario" class="tab-panel">
+      <h2>Horario semanal</h2>
+      <p class="hint">Asigna una rutina y un horario a cada día de la semana.</p>
+      <div id="horario-content"></div>
+    </section>
+
+    <section id="tab-rutinas" class="tab-panel">
+      <h2>Rutinas</h2>
+      <div id="rutinas-content"></div>
+      <h3>Crear rutina personalizada</h3>
+      <form id="form-nueva-rutina" class="card">
+        <label>Nombre de la rutina
+          <input type="text" id="nueva-rutina-nombre" required placeholder="Ej. Piernas y core">
+        </label>
+        <div id="nueva-rutina-ejercicios" class="checkbox-list"></div>
+        <button type="submit" class="btn-primary">Crear rutina</button>
+      </form>
+      <h3>Agregar ejercicio a la biblioteca</h3>
+      <form id="form-nuevo-ejercicio" class="card">
+        <label>Nombre
+          <input type="text" id="ej-nombre" required placeholder="Ej. Sentadilla sumo">
+        </label>
+        <label>Categoría
+          <select id="ej-categoria">
+            <option>Calentamiento</option>
+            <option>Fuerza tren superior</option>
+            <option>Fuerza tren inferior</option>
+            <option>Core</option>
+            <option>Cardio</option>
+            <option>Estiramiento</option>
+          </select>
+        </label>
+        <div class="row">
+          <label>Series
+            <input type="number" id="ej-series" min="1" value="3" required>
+          </label>
+          <label>Repeticiones
+            <input type="text" id="ej-reps" required placeholder="Ej. 12 o 20 seg">
+          </label>
+        </div>
+        <button type="submit" class="btn-secondary">Agregar ejercicio</button>
+      </form>
+    </section>
+
+    <section id="tab-historial" class="tab-panel">
+      <h2>Historial de actividad</h2>
+      <div class="row filters">
+        <label>Desde <input type="date" id="filtro-desde"></label>
+        <label>Hasta <input type="date" id="filtro-hasta"></label>
+        <button id="btn-limpiar-filtro" class="btn-secondary">Limpiar filtro</button>
+      </div>
+      <div id="historial-resumen" class="card"></div>
+      <div id="historial-content"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Tus datos se guardan solo en este navegador (localStorage).</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
